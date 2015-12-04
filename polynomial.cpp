@@ -31,3 +31,22 @@ Polynomial::~Polynomial()
 {
 	delete [] coeff;
 }
+Polynomial::operator+(const Polynomial &q) const
+{
+	Polynomial r;
+	int i;
+	if(n==q.n)
+	{
+		for(i=n;i>=0;i--)
+			if((coeff[i]+q.coeff[i])!=0)
+				break;
+		r.n=i;
+	}
+	else
+		r.n=(n>q.n)?n:q.n;
+	
+	for(int j=0;j<r.n+1;j++)
+			r.coeff[j]=coeff[j]+q.coeff[j];
+
+	return r;
+}
