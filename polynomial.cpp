@@ -50,3 +50,10 @@ Polynomial::operator+(const Polynomial &q) const
 
 	return r;
 }
+Polynomial::operator-(const Polynomial &q) const
+{
+	Polynomial r(q);
+	for(int i=0;i<r.n+1;i++)
+		r.coeff[i]=-r.coeff[i];
+	return p+r;
+}
