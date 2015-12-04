@@ -57,3 +57,12 @@ Polynomial::operator-(const Polynomial &q) const
 		r.coeff[i]=-r.coeff[i];
 	return p+r;
 }
+Polynomial::operator*(const Polynomial &q) const
+{
+	Polynomial r(n+q.n);
+	for(int i=0;i<n+1;i++)
+		for(int j=0;j<q.n+1;j++)
+			r.coeff[i+j]+=coeff[i]*q.coeff[j];
+	return r;
+}
+
