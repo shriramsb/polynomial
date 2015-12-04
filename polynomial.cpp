@@ -80,3 +80,7 @@ Polynomial::operator/(const Polynomial &q) const
 		return (r+(*this-(r*q))/q);
 	}
 }
+Polynomial::operator%(const Polynomial &q) const
+{
+	return (*this-((*this)/q)*q);
+}
