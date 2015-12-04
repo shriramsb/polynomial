@@ -66,3 +66,17 @@ Polynomial::operator*(const Polynomial &q) const
 	return r;
 }
 
+Polynomial::operator/(const Polynomial &q) const
+{
+	if(n<q.n)
+	{
+		Polynomial r(0);
+		return r;
+	}
+	else
+	{
+		Polynomial r(n-q.n);
+		r.coeff[r.n]=coeff[n]/q.coeff[q.n];
+		return (r+(*this-(r*q))/q);
+	}
+}
