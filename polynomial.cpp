@@ -49,13 +49,37 @@ Polynomial Polynomial::operator+(const Polynomial &q) const
 			if((coeff[i]+q.coeff[i])!=0)
 				break;
 		r.n=i;
+		if(r.n!=-1)
+		{
+			r.coeff=new float[r.n+1];
+			for(int j=0;j<r.n+1;j++)
+				r.coeff[j]=coeff[j]+q.coeff[j];
+		}
+		else
+		{
+			r.coeff=new float[1];
+			r.coeff[0]=0;
+		}
+	}
+	else if(n>q.n)
+	{
+		r.n=n;
+		r.coeff=new float[r.n+1];
+		for(i=0;i<q.n+1;i++)
+			r.coeff[i]=coeff[i]+q.coeff[i];
+		for(;i<n+1;i++)
+			r.coeff[i]=coeff[i];
 	}
 	else
-		r.n=(n>q.n)?n:q.n;
+	{
+		r.n=q.n;
+		r.coeff=new float[r.n+1];
+		for(i=0;i<n+1;i++)
+			r.coeff[i]=coeff[i]+q.coeff[i];
+		for(;i<q.n+1;i++)
+			r.coeff[i]=q.coeff[i];
+	}
 	
-	for(int j=0;j<r.n+1;j++)
-			r.coeff[j]=coeff[j]+q.coeff[j];
-
 	return r;
 }
 Polynomial Polynomial::operator-(const Polynomial &q) const
