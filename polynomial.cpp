@@ -150,4 +150,30 @@ Polynomial Polynomial::operator=(const Polynomial &c)
 	return c;
 
 }
-
+Polynomial Polynomial::derivative() const
+{
+	if(n==-1)
+		Polynomial r(-1);
+	else
+	{
+		Polynomial r(n-1);
+		for(int i=0;i<n;i++)
+			r.coeff[i]=coeff[i+1]*(i+1);
+	}
+	return r;
+}
+Polynomial Polynomial::integral() const
+{
+	if(n==-1)
+	{
+		Polynimial r(-1);
+		return r;
+	}
+	else
+	{
+		Polynomial r(n+1);	//constant of integration is zero always
+		for(int i=0;i<n+1;i++)
+			r.coeff[i+1]=coeff[i]/(i+1);
+		return r;
+	}
+}
