@@ -177,3 +177,25 @@ Polynomial Polynomial::integral() const
 		return r;
 	}
 }
+float Polynomial::value(const float a) const
+{
+	float b=0,expa=1;
+	for(int i=0;i<n+1;i++)
+	{
+		b+=coeff[i]*expa;
+		expa*=a;
+	}
+	return b;
+}
+void Polynomial::print() const
+{
+	if(n==-1)
+		cout<<0;
+	else
+	{
+		cout<<coeff[0];
+		for(int i=1;i<n+1;i++)
+			if(coeff[1]!=0)
+				cout<<" + "<<coeff[i]<<"*x^"<<i;
+	}
+}
