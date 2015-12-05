@@ -91,16 +91,28 @@ Polynomial Polynomial::operator-(const Polynomial &q) const
 }
 Polynomial Polynomial::operator*(const Polynomial &q) const
 {
-	Polynomial r(n+q.n);
-	for(int i=0;i<n+1;i++)
-		for(int j=0;j<q.n+1;j++)
-			r.coeff[i+j]+=coeff[i]*q.coeff[j];
-	return r;
+	if(n==-1 || q.n==-1)
+	{
+		Polynomial r(-1);
+		return r;
+	}
+	else
+	{
+		Polynomial r(n+q.n);
+		for(int i=0;i<n+1;i++)
+			for(int j=0;j<q.n+1;j++)
+				r.coeff[i+j]+=coeff[i]*q.coeff[j];
+		return r;
+	}
 }
-
-PolynomialPolynomial::operator/(const Polynomial &q) const
+Polynomial Polynomial::operator/(const Polynomial &q) const
 {
-	if(n<q.n)
+	if(q.n==-1)
+	{
+		Polynomial r(-1);
+		return r;	//returns zero polynomial if division is not defined
+	}
+	else if(n<q.n)
 	{
 		Polynomial r(-1);
 		return r;
@@ -114,7 +126,7 @@ PolynomialPolynomial::operator/(const Polynomial &q) const
 }
 Polynomial Polynomial::operator%(const Polynomial &q) const
 {
-	return (*this-((*this)/q)*q);
+	return (*this-((*this)/q)*q);	//returns zero polynomial if division is not defined
 }
 int Polynomial::getn()
 {
@@ -124,9 +136,18 @@ Polynomial Polynomial::operator=(const Polynomial &c)
 {
 	n=c.n;
 	delete [] coeff;
-	coeff=new float[n+1];
-	for(int i=0;i<n+1;i++)
-		coeff[i]=c.coeff[i];
+	if(c.n==-1)
+	{
+		coeff=new float[1];
+		coeff[0]=0;
+	}
+	else
+	{
+		coeff=new float[n+1];
+		for(int i=0;i<n+1;i++)
+			coeff[i]=c.coeff[i];
+	}
 	return c;
+
 }
 
